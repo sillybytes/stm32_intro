@@ -42,7 +42,7 @@ The other option is to get one of the nice development boards ST offers:
 
 Although these are cheap and amazing, we can go even cheaper with the great
 breakout boards available on Ebay. You can get a STM32F103 chip in a nice board
-for less than $5.
+for less than $5 (USD).
 
 ![](./ebay_board1.png)
 ![](./ebay_board2.png)
@@ -53,14 +53,16 @@ for less than $5.
 STM32 chips are programmed using a
 [ST-LINK](https://en.wikipedia.org/wiki/ARM_architecture) device, which is an
 in-circuit debugger and programmer that interfaces with the chip using JTAG or
-Serial Wire Debugging (SWD). This is similar to the USBASP for AVR or the PICKIT
-for PIC.
+Serial Wire Debugging
+([SWD](http://www.arm.com/products/system-ip/debug-trace/coresight-soc-components/serial-wire-debug.php)).
+This is similar to the USBASP for AVR or the PICkit for PIC.
 
 Development boards like the *Nucleo* include the st-link hardware directly into
 the board, so you can connect it to a host computer using USB and program/debug
 the target chip on the board without any additional external hardware.
 
 ![](board_st-link.png)
+
 
 If you're using another breakout board (like the Ebay ones) or if you mounted a
 chip in a custom PCB, you will need an external st-link hardware. Fortunately
@@ -87,13 +89,15 @@ st-link you'll need to connect four wires to it:
 voltage regulator so it can be powered from USB, and st-link dongles will
 provide a 3.3V VCC PIN to power up the chip. **DON'T** Connect the board to the
 PC using USB while the chip is powered up using the st-link programmer! Connect
-one or the other but not both simultaneously.
+one or the other but not both simultaneously. The st-link dongle provides a 5V
+PIN as well, **DON'T** use it, the STM32 chips are not 5V tolerant, use the 3.3V
+PIN only.
 
-ST-Link dongles has labeling on the front, just connect the right pins. On the
+ST-Link dongles have labeling on the front, just connect the right pins. On the
 board side, follow the labeling printed on the pins or use a JTAG/SWD pin out
 diagram if your board has a JTAG/SWD connector like mine. The connections for
 the st-link on the breakout board I'm using looks like this:
 
+![](swd.jpg)
 ![](connection1.jpg)
 ![](connection2.jpg)
-![](swd.jpg)
