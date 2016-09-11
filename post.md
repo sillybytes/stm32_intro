@@ -101,3 +101,114 @@ the st-link on the breakout board I'm using looks like this:
 ![](swd.jpg)
 ![](connection1.jpg)
 ![](connection2.jpg)
+
+
+## Software
+
+### Host PC
+
+You'll need a compiler, a debugger, some utilities to manage your binaries and
+the necessary software to flash your firmware using the ST-LINK device (dongle
+or built-in):
+
+* arm-none-eabi-gcc
+* arm-none-eabi-gdb
+* arm-none-eabi-binutils
+* stlink
+
+You should be able to install them all of from your distribution repositories.
+But in case you can't find `stlink` on them, get it from the [github
+repo](https://github.com/texane/stlink).
+
+The `stlink` package provides these executables:
+
+* st-flash (Write and Read a program from the target chip)
+* st-util (Creates a GDB server so you can load, run and debug a program on the target chip)
+* st-info (Search and provides information about the st-link device and the target chip)
+* st-term (Allows to get log-like reports from the program on the target chip)
+
+
+#### Test the setup
+
+With the hardware connected and the PC software installed we can try it out and
+see if everything is working OK. Not example program yet though.
+
+Connect your st-link device (connected to the breakout board) or you development
+board to the host PC using USB and run:
+
+    $ st-info --probe
+
+You'll get some neat information about the chip that is hooked up to the st-link
+device:
+
+    Found 1 stlink programmers
+    serial: 543f6a06663f505130531567
+    openocd: "\x54\x3f\x6a\x06\x66\x3f\x50\x51\x30\x53\x15\x67"
+    flash: 65536 (pagesize: 1024)
+    sram: 20480
+    chipid: 0x0410
+    descr: F1 Medium-density device
+
+Fantastic! Everything is working fine, lets move on.
+
+
+### Chip
+
+ARM provides a Cortex Microcontroller Software Interface Standard
+([SMSIS](http://www.arm.com/products/processors/cortex-m/cortex-microcontroller-software-interface-standard.php))
+as an abstraction layer for the ARM Cortex core to increase software
+portability. Think of it as an standard API that you can use to interface with
+ARM chips in a standard and vendor independent way.
+
+On top of that you might want to have a Hardware Abstraction Layer (HAL) to
+interface with the peripherals the chip provides (UART, USB, I2C, SPI, TIMERS,
+etc).
+
+We have two options of libraries that provide those abstraction layers:
+
+* [LibOpenCM3](http://libopencm3.github.io/) (The one we are going to use)
+* [STM32Cube](http://www.st.com/content/st_com/en/products/embedded-software/mcus-embedded-software/stm32-embedded-software/stm32cube-embedded-software/stm32cubef1.html)
+
+LibOpenCM3 is uses the LGPL licence (which I prefer), and STM32Cube uses the lax
+BSD licence. Balau covered the licensing topic in more detail in his [blog
+post](https://balau82.wordpress.com/2015/04/12/libopencm3-for-the-license-sensitive-cortex-m-developer/).
+
+
+#### STM32Cube
+
+ST provides the so called "STM32Cube", which is a bundle of software and
+libraries for STM32 development. It contains a graphical software for basic C
+code generation, software layers of abstraction like HAL and middleware,
+software layers for built-in peripherals on ST's development boards and
+examples.
+
+The *STM32Cube* is available per chip series, so for development boards with
+STM32F4xx chips you'll need the *STM32CubeF4*. I have a breakout board with the
+STM32F103C8 chip, so I would use the
+[*STM32CubeF1*](http://www.st.com/content/st_com/en/products/embedded-software/mcus-embedded-software/stm32-embedded-software/stm32cube-embedded-software/stm32cubef1.html),
+you get the idea.
+
+STM32Cube provides 3 layers:
+
+##### Level 0
+
+* Board Support Package (BSP) for interfacing with devices on the board that are
+not in the STM32 chip.
+* Hardware Abstraction Layer (HAL) for low-level hardware interfacing (UART,
+  USB, I2C, SPI, TIMERS, etc).
+
+##### Level 1
+
+Middleware software components like USB Host and Device libraries or FAT file
+system for SD cards interfacing
+
+##### Level 2
+
+Graphical demonstration that uses the level 1 Middleware.
+
+
+You can read more about it on the STM32Cube user manual. Here is the STM32CubeF1
+[manual](http://www.st.com/content/ccc/resource/technical/document/user_manual/a4/ae/25/45/76/ca/40/b1/DM00151047.pdf/files/DM00151047.pdf/jcr:content/translations/en.DM00151047.pdf).
+
+
+#### LibOpenCM3
