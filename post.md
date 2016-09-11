@@ -244,14 +244,14 @@ important thing here.
     $ cd f1
     $ cd stm32-h103/miniblink
 
-This example will BLINK an LED connected in the PIN 12 of the GPIO port C, but
+This example will BLINK a LED connected in the PIN 12 of the GPIO port C, but
 my chip doesn't have it! No problem, I'm going to change it (you can use your
 favorite editor here):
 
     $ vim miniblink.c
 
 Now change all appearances of `GPIOC` to `GPIOB` so the program uses the GPIO
-port B instead.
+port B instead. (Use an available pin in your specific chip/board).
 
 In Vim:
 
@@ -271,3 +271,34 @@ Flash it:
 
 Connect a LED to the GND and PB12 pins through a 330 Ohm resistor and watch it
 blink with great joy.
+
+
+## Using GDB
+
+You can also interface with the target device using GDB: Upload firmware, run,
+stop, set break points, etc. I'm going to assume you know how to use GDB and
+only going to explain how to upload the firmware from it.
+
+Create a GDB server to interface with the connected target:
+
+    $ st-util -p 4444
+
+Run ARM GDB:
+
+    $ arm-none-eabi-gdb
+
+Connect to the server
+
+    (gdb) target extended-remote localhost:4444
+
+Flash the firmware (notice we're using the ELF file here not the BIN one):
+
+    (gdb) load miniblink.elf
+
+Run the firmware:
+
+    (gdb) continue
+
+You can stop it with `C-c`.
+
+![](running.jpg)
