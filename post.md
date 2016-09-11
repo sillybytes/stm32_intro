@@ -212,3 +212,11 @@ You can read more about it on the STM32Cube user manual. Here is the STM32CubeF1
 
 
 #### LibOpenCM3
+
+LibOpenCM3 aims to provide a free (as in freedom) library for various ARM
+Cortex-M3 microcontrollers, including the STM32 chips.
+
+Using this library is more or less straight forward, there is no layers here.
+You can read more about it in the [wiki](http://libopencm3.org/wiki/Main_Page).
+They have a fantastic Doxygen documentation for the API
+[here](http://libopencm3.github.io/docs/latest/html/).
