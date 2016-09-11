@@ -220,3 +220,54 @@ Using this library is more or less straight forward, there is no layers here.
 You can read more about it in the [wiki](http://libopencm3.org/wiki/Main_Page).
 They have a fantastic Doxygen documentation for the API
 [here](http://libopencm3.github.io/docs/latest/html/).
+
+
+## First program
+
+The LibOpenCM3 project provides very useful examples, lets use one of those as
+the first program. I'm Using the STM32F103C8T6 so I need the *F1* series
+examples and libraries, adjust the steps to use the appropriate one for your
+chip/board.
+
+Notice that the examples are organized to correspond to various development
+boards, but it doesn't really matter, the reason for this is the distribution of
+LED's and Push buttons in those boards, but as long as you're using the same
+chip series you just need to pickup one and connect LED's, buttons, etc in the
+right pins as needed. I'm going to use the examples for the *"stm32-h103"* board
+from Olimex, even though I'm using a breakout board from Ebay; The **F1** is the
+important thing here.
+
+    $ git clone --recursive 'https://github.com/libopencm3/libopencm3-examples'
+    $ cd libopencm3-examples
+    $ make
+    $ cd examples/stm32
+    $ cd f1
+    $ cd stm32-h103/miniblink
+
+This example will BLINK an LED connected in the PIN 12 of the GPIO port C, but
+my chip doesn't have it! No problem, I'm going to change it (you can use your
+favorite editor here):
+
+    $ vim miniblink.c
+
+Now change all appearances of `GPIOC` to `GPIOB` so the program uses the GPIO
+port B instead.
+
+In Vim:
+
+    :%s/GPIOC/GPIOB
+
+Save the file and compile:
+
+    $ make
+
+Generate binary:
+
+    $ arm-none-eabi-objcopy -O binary miniblink.elf miniblink.bin
+
+Flash it:
+
+    $ st-flash write miniblink.bin 0x8000000
+
+Connect a LED to the GND and PB12 pins through a 330 Ohm resistor and watch it
+blink with great joy.
