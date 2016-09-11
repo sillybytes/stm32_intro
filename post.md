@@ -1,6 +1,6 @@
 # Gentle introduction to STM32 ARM Cortex microcontrollers and boards programming
 
-![](./stm32_chip.jpg)
+![](./stm32_chip.png)
 
 So you have been using AVR, PIC or some other microcontroller for a while and
 discover that ST Microelectronics offers some pretty cheap 32 bit ARM and
@@ -37,15 +37,15 @@ The other option is to get one of the nice development boards ST offers:
 * [Nucleo](http://www.st.com/content/st_com/en/products/evaluation-tools/product-evaluation-tools/mcu-eval-tools/stm32-mcu-eval-tools/stm32-mcu-nucleo.html?querycriteria=productId=LN1847)
 * [Discovery](http://www.st.com/content/st_com/en/products/evaluation-tools/product-evaluation-tools/mcu-eval-tools/stm32-mcu-eval-tools/stm32-mcu-discovery-kits.html?querycriteria=productId=LN1848)
 
-![](./nucleo_board.jpg)
+![](./nucleo_board.png)
 
 
 Although these are cheap and amazing, we can go even cheaper with the great
 breakout boards available on Ebay. You can get a STM32F103 chip in a nice board
 for less than $5.
 
-![](./ebay_board1.jpg)
-![](./ebay_board2.jpg)
+![](./ebay_board1.png)
+![](./ebay_board2.png)
 
 
 ### Programmer
@@ -94,6 +94,6 @@ board side, follow the labeling printed on the pins or use a JTAG/SWD pin out
 diagram if your board has a JTAG/SWD connector like mine. The connections for
 the st-link on the breakout board I'm using looks like this:
 
-![](connection1.png)
-![](connection2.png)
+![](connection1.jpg)
+![](connection2.jpg)
 ![](swd.jpg)
