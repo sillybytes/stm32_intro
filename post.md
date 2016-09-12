@@ -173,7 +173,7 @@ We have two options of libraries that provide those abstraction layers:
 * [LibOpenCM3](http://libopencm3.github.io/) (The one we are going to use)
 * [STM32Cube](http://www.st.com/content/st_com/en/products/embedded-software/mcus-embedded-software/stm32-embedded-software/stm32cube-embedded-software/stm32cubef1.html)
 
-LibOpenCM3 is uses the LGPL licence (which I prefer), and STM32Cube uses the lax
+LibOpenCM3 uses the LGPL licence (which I prefer), and STM32Cube uses the lax
 BSD licence. Balau covered the licensing topic in more detail in his [blog
 post](https://balau82.wordpress.com/2015/04/12/libopencm3-for-the-license-sensitive-cortex-m-developer/).
 
@@ -265,7 +265,7 @@ Save the file and compile:
 
     $ make
 
-Generate binary:
+Generate the binary:
 
     $ arm-none-eabi-objcopy -O binary miniblink.elf miniblink.bin
 
