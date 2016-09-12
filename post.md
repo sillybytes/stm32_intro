@@ -18,8 +18,12 @@ Note: Be aware that *ARM* is an **architecture** that manufacturers can
 *implement*. Is a common mistake to think *ARM* is a microcontroller on
 itself, it is not.
 
-If you were using AVR or PIC going to a 32 bit ARM chip is a big step
-forwards.
+ST Microelectronics's implementation of ARM are the STM32 microcontrollers:
+inexpensive, powerful and with great free software/hardware support.
+
+Various series are available: F0, F1, F2, ..., F7; From less to more powerful.
+You can identify your chip series after the *STM32* prefix, I'm using a board
+with the "STM32F103C8" chip, so the series is *F1*.
 
 
 ## Hardware
