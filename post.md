@@ -32,7 +32,7 @@ As I mentioned STM32 chips are very inexpensive and widely available as
 individual chips, mounted in convenient development boards or breakout boards.
 
 Individual chips can be bought from electronic stores like Digi-Key or Mauser,
-but for the current purposes make your own PCB to mount them is quite
+but for the current purposes making your own PCB to mount them is quite
 inconvenient.
 
 The other option is to get one of the nice development boards ST offers:
